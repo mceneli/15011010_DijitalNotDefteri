@@ -1,0 +1,69 @@
+apply plugin: 'com.android.application'
+
+repositories {
+    google()
+}
+
+android {
+    compileSdkVersion 28
+    buildToolsVersion "28.0.3"
+
+    defaultConfig {
+        applicationId "com.muhammet.notepad"
+        minSdkVersion 14
+        targetSdkVersion 28
+
+        versionCode 110
+        versionName "2.3.5"
+
+        resConfigs "en"
+        vectorDrawables.useSupportLibrary = true
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    signingConfigs {
+        release {
+            if(System.getenv("KSTOREFILE") != null)
+                storeFile file(System.getenv("KSTOREFILE"))
+
+            storePassword System.getenv("KSTOREPWD")
+            keyAlias System.getenv("KEYALIAS")
+            keyPassword System.getenv("KEYPWD")
+        }
+    }
+
+    buildTypes {
+        debug {
+            applicationIdSuffix ".debug"
+            manifestPlaceholders = [appName: "@string/app_name_debug"]
+        }
+
+        release {
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+            manifestPlaceholders = [appName: "@string/app_name"]
+
+            applicationVariants.all { variant ->
+                variant.outputs.all {
+                    outputFileName = "${project.parent.name}-${defaultConfig.versionName}.apk"
+                }
+            }
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.appcompat:appcompat:1.0.2'
+    implementation 'com.google.android.material:material:1.0.0'
+    implementation 'org.apache.commons:commons-lang3:3.8.1'
+    implementation 'us.feras.mdv:markdownview:1.1.0'
+}

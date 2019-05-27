@@ -1,0 +1,40 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layoutNoteView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/primary"
+    android:clipToPadding="true"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    android:clickable="true" >
+
+    <TextView
+        android:id="@+id/textview2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:scrollbars="vertical" >
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:autoLink="all"
+            android:clickable="true"
+            android:linksClickable="true"
+            android:paddingLeft="@dimen/padding_left_right"
+            android:paddingTop="@dimen/padding_top_bottom"
+            android:paddingRight="@dimen/padding_left_right"
+            android:paddingBottom="@dimen/padding_top_bottom"
+            android:text="@null"
+            android:textIsSelectable="true"
+            android:textSize="18sp" />
+
+    </ScrollView>
+
+</LinearLayout>
